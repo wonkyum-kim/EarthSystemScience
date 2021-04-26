@@ -1,4 +1,5 @@
 data = load('agedepth_1.txt');
+
 x = data(:,1);
 y = data(:,2);
 sx = std(x);
@@ -6,7 +7,8 @@ sy = std(y);
 C = cov(x,y);
 cv = C(1,2);
 r = cv / (sx * sy);
-% 1에 가까울 수록 잘 맞는다는 의미다.
+% -1 <= r <= 1
+% r == 0 이면 상관관계가 없다는 뜻이다.
 fprintf("correlation coefficient : %g\n", r);
 figure, plot(x,y,'*');
 xlabel('depth')
