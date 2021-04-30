@@ -7,7 +7,7 @@ y = data(:,2);
 
 N = length(x);
 temp = [x,ones(N,1)];
-% p = polyfit(depth,age,1); 
+% p = polyfit(x,y,1); 
 p = (temp'*temp)\(temp'*y);
 
 % regression 나타내기
@@ -26,4 +26,25 @@ hold on, plot(xx,yy+delta,'--k'), plot(xx,yy-delta,'--k');
 xhat = x;
 yhat = p(1) * xhat + p(2);
 residual = y - yhat;
-RMSE = sqrt(sum((residual).^2) / N);
+
+% RMSE를 구하기
+% 0에 가까울 수록 좋다.
+RMSE  = @(yhat,y) sqrt(sum((yhat - y).^2) / length(y));
+
+% 1차식의 RMSE
+RMSE_1 = RMSE(yhat,y);
+
+% R-square을 구하기
+% 1에 가까울 수록 좋다.
+ym = mean(y);
+ytot = y - ym;
+R_square = 1 - sum(residual.^2) / sum(ytot.^2);
+
+% 2차식으로 regression
+p = polyfit(x,y,2);
+yhat_2 = p(1) * x.^2 + p(2) * x + p(3);
+% yy2 = polyval(p,x);
+hold on, plot(x, yhat_2, '--k');
+
+% 2차식의 RMSE
+RMSE_2 = RMSE(yhat_2,y);
