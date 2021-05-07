@@ -17,6 +17,7 @@ figure,plot(pwy);
 dt = 1;
 fnyq1 = -1 / (2 * dt);
 fnyq2 = 1 / (2 * dt);
+% del f = (1 / n) * (1 / del t)
 f = [fnyq1:1 / 1000:fnyq2];
 f = f(1:end-1);
 % f(1) = -0.5, f(end) = 0.499
