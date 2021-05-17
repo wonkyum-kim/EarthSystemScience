@@ -52,3 +52,7 @@ pyr = y_residual.*conj(y_residual);
 % x(t)와 y(t)의 convolution을 주파수 영역의 곱셈으로 구하고 싶을 때
 % n = max(length(x), length(y))로 설정하고
 % nf = 2^(nextpow2(n) + 1)로 설정해야 오류가 뜨지 않는다.
+% fx = fft(x,nf);
+% fy = fft(y,nf);
+% z = ifft(fx.*fy);
+% z = z(1 : length(x) + length(y) - 1) 로 해주면 원하는 길이만큼만 얻을 수 있다.
