@@ -5,6 +5,7 @@ y = data(:,2);
 % 1차식으로 regression
 % y = a1x + a0
 
+% 높은 order가 먼저 나오도록 만들어 준다.
 N = length(x);
 temp = [x,ones(N,1)];
 % p = polyfit(x,y,1); 
