@@ -50,4 +50,38 @@ hold on, plot(real(y),'r');
 % 단 B는 SF보다 커지면 안된다.
 % nyqf = +- 1/(2*dt) = +- SF/2
 
-% 1h02m
+% --------------------------------------------------------
+
+% interpolation
+% dft를 하려면 데이터 간격이 같아야 한다.
+% linear / nearest / cubic, pchip / spline
+
+data = load('co2-mm-mlo.txt');
+x1 = data(:,2);
+y1 = data(:,3);
+temp = y1 >= 0;
+y1 = y1(temp);
+x1 = x1(temp);
+x1 = x1 - 1958;
+
+% 등간격인지 확인해본다.
+figure, plot(diff(x1));
+
+% x1(end) = 60.2xx 이므로
+xn = [0:1/12:60]';
+
+% linear로 interpolation
+yn = interp1(x1,y1,xn);
+
+% pchip로 interpolation
+ync = interp1(x1,y1,xn,'pchip');
+
+
+% y1값에 noise를 추가해보자
+N = length(y1);
+y2 = y1 + rand(N,1);
+
+yn2 = interp1(x1,y2,xn);
+
+figure, plot(x1,y2);
+hold on, plot (xn, yn2,'g');
