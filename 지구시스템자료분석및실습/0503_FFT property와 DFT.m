@@ -69,4 +69,12 @@ rfy = ifft(ifftshift(fy));
 figure, plot(t,y);
 hold on, plot(t, real(rfy));
 
-% 27min
+% zeros padding
+
+% time 영역에서 zeros padding은 뒤에 덧 붙여주면 된다.
+% ex) y = [y, zeros(1,256 - 100)]
+% 2배 늘어나면 nyqf는 그대로지만 df가 1/2줄어든다.
+
+% frequency 영역에서 zeros padding은 앞 뒤로 덧 붙여야 한다.
+% ex) fy = [zeros(1,64), fy, zeros(1,64)]
+% 2배 늘어나면 time 영역에서 dt가 1/2배가 된다.
