@@ -32,3 +32,24 @@ fy = fftshift(fft(y_itp_pchip - my, nf));
 % figure, plot(f,abs(fy));
 
 % 주기성이 잘 안보인다면 dt를 더 줄여보자.
+
+
+%---------------------------------------------------
+
+% principal component analysis
+
+data = load('sediments.txt');
+[coeff, score, latent] = pca(data);
+
+% coeff
+% -> eigen vector의 방향을 나타낸다.
+
+% score
+% -> 새로운 축의 좌표를 나타낸다.
+
+% latent
+% -> 폭을 나타낸다.
+% pct = latent / sum(latent) * 100 으로 비율을 볼 수 있다.
+
+
+
