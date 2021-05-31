@@ -1,5 +1,3 @@
-0526_PCA
-
 % principal component
 
 data = load('sediments.txt');
