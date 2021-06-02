@@ -16,3 +16,4 @@ pwy = fy.*conj(fy);
 dt = 1;
 f = [-1/(2*dt):1/1000:1/(2*dt)];
 f = f(1:end-1);
+figure,plot(f,pwy);
