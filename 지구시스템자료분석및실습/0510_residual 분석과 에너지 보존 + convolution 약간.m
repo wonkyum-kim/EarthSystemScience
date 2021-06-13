@@ -56,3 +56,20 @@ pyr = y_residual.*conj(y_residual);
 % fy = fft(y,nf);
 % z = ifft(fx.*fy);
 % z = z(1 : length(x) + length(y) - 1) 로 해주면 원하는 길이만큼만 얻을 수 있다.
+
+x = ones(32,1);
+y = triang(32);
+z = conv(x,y);
+
+n = max(length(x),length(y));
+nf = 2^(nextpow2(n)+1);
+f = [0:nf-1]/nf-0.5;
+fx = fftshift(fft(x,nf));
+fy = fftshift(fft(y,nf));
+fxy = fx.*fy;
+zz = ifft(ifftshift(fxy));
+zz = zz(1:length(x) + length(y) - 1);
+
+figure,plot(zz);
+figure,plot(z);
+
