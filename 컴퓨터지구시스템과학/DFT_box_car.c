@@ -60,4 +60,21 @@ int main()
 		fprintf(fp, "%f %f %f\n", df * i, Aw_r[i], Aw_i[i]);
 	}
 	fclose(fp);
+
+	// IDFT
+
+	double ia[128] = { 0 };
+
+	for (int k = 0; k < N; ++k) {
+		for (int n = 0; n < N; ++n) {
+			double factor = 2 * PI * n * k / N;
+			ia[k] += Aw_r[n] * cos(factor);
+		}
+	}
+	
+	fp = fopen("idft.txt", "w");
+	for (int i = -N / 2; i < N / 2; ++i) {
+		fprintf(fp, "%d %f\n", i, ia[i + N / 2]);
+	}
+	fclose(fp);
 }
